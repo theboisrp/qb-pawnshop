@@ -32,8 +32,10 @@ RegisterNetEvent('qb-pawnshop:server:sellPawnItems', function(itemName, itemAmou
     if dist > 5 then exploitBan(src, 'sellPawnItems Exploiting') return end
     if Player.Functions.RemoveItem(itemName, tonumber(itemAmount)) then
         if Config.BankMoney then
+            TriggerEvent('logsystem:log', Player.source, "Recived Pawn shop money ("..tostring(totalPrice)..")")
             Player.Functions.AddMoney('bank', totalPrice)
         else
+            TriggerEvent('logsystem:log', Player.source, "Recived Pawn shop money ("..tostring(totalPrice)..")")
             Player.Functions.AddMoney('cash', totalPrice)
         end
         TriggerClientEvent('QBCore:Notify', src, Lang:t('success.sold', { value = tonumber(itemAmount), value2 = QBCore.Shared.Items[itemName].label, value3 = totalPrice }),'success')
